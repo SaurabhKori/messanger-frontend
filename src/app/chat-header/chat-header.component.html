@@ -1,0 +1,104 @@
+ <!-- <nav class="navbar bg-[#2a2929] navbar-expand-lg">
+          <div class="container-fluid mt-2.5">
+            <span class="text-[20px] ml-[15px]">Chats</span>
+            <div class="flex justify-between w-16">
+              <span class="w-16 h-[40px] rounded-[3px] flex justify-center items-center">
+                <i class="fa-solid fa-pen-to-square"></i></span>
+              <span class="w-16 h-[40px] rounded-[3px] flex justify-center items-center"><span
+                  class="material-symbols-outlined">
+                  filter_list
+                </span></span>
+            </div>
+          </div>
+        </nav> -->
+
+
+
+       <nav class="navbar bg-[#2a2929] navbar-expand-lg relative">
+  <div class="container-fluid mt-2.5">
+    <span class="text-[20px] ml-[15px] text-white">Chats</span>
+    <div class="flex justify-between w-16 relative">
+      <span class="w-16 h-[40px] rounded-[3px] flex justify-center items-center">
+        <i class="fa-solid fa-pen-to-square text-white"></i>
+      </span>
+
+      <span
+        class="w-16 h-[40px] rounded-[3px] flex justify-center items-center cursor-pointer"
+        (click)="toggleFilter()"
+      >
+        <span class="material-symbols-outlined text-white"> filter_list </span>
+      </span>
+
+      <!-- Filter dropdown -->
+      <div
+        [class.hidden]="!showFilter"
+        class="absolute right-0 top-12 bg-white text-black rounded shadow-md w-60 z-50 origin-top-right transform transition ease-out duration-200 scale-95 opacity-0"
+        [class.scale-100]="showFilter"
+        [class.opacity-100]="showFilter"
+      >
+        <ul>
+          <li
+            class="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+            (click)="openContacts()"
+          ><i class="fa-solid fa-user"></i>
+            Contacts
+          </li>
+          <li
+            class="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+            (click)="openAddContactPopup()" 
+          ><i class="fa-solid fa-user"></i>
+            Add Contact
+          </li>
+          <li
+            class="px-4 py-2 hover:bg-gray-200 cursor-pointer"
+            (click)="viewFavourites()"
+          >
+           <i class="fa-solid fa-heart"></i> Favourites
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<!-- Add Contact Popup -->
+<div
+  [class.hidden]="!showAddContact"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div class="bg-white rounded-lg p-6 w-80">
+    <form  [formGroup]="newContactNumber" (ngSubmit)="saveContact()">
+    <h2 class="text-lg font-bold mb-4  !text-gray-900 ">Add Contact</h2>
+    <label class="block mb-2 text-sm font-medium text-gray-700">Contact Number</label>
+    <input
+      type="text"
+      formControlName="userPhone"
+      placeholder="Enter contact number"
+      class="w-full border border-gray-300  !text-gray-900 rounded px-4 py-2 mb-4 focus:outline-none focus:ring focus:ring-green-400"
+    />
+     @if (newContactNumber.get('userPhone')?.dirty || newContactNumber.get('usr_phone')?.touched) {
+            @if(newContactNumber.get('userPhone')?.hasError('required')){
+               <span class="text-[12px] text-red-700">contact number is required*</span>
+            }@else if (newContactNumber.get('userPhone')?.hasError('pattern') || newContactNumber.get('userPhone')?.hasError('maxLength') || newContactNumber.get('userPhone')?.hasError('minLength')) {
+              <span class="text-[12px] text-red-700">please enter correct contact number*</span>
+            }
+          }
+    <div class="flex justify-end gap-2">
+      <button
+        (click)="closeAddContactPopup()"
+        class="px-4 py-2 bg-gray-300 rounded hover:bg-gray-400"
+      >
+        Cancel
+      </button>
+      <button
+        (click)="saveContact()"
+        class="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700"
+      >
+        Save
+      </button>
+    </div>
+    </form>
+  </div>
+</div>
+
+

@@ -1,0 +1,15 @@
+@for (item of contactChat; track $index) {
+<div class=" flex mt-6 ms-3 w-[97%] h-[85px] rounded-xl hover:bg-[#383636] " (click)="selectContact(item)">
+    <div class="flex justify-start items-center  w-[80%] gap-6 ml-3.5">
+        <span class="w-[50px] h-[50px] rounded-full bg-cover bg-center border-2 border-gray-300" [ngStyle]="{
+    'background-image': item.file
+      ? 'url(' + url + item.file.fileurl + ')'
+      : 'url(profile.png)'
+  }">
+        </span>
+        <span class=""><span class="">{{item.contactUser.user_name}}</span><br><span>Hi am petter </span></span>
+    </div>
+
+    <span class="ml-20">11:8</span>
+</div>
+}

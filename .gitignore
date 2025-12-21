@@ -40,3 +40,9 @@ testem.log
 # System files
 .DS_Store
 Thumbs.db
+# downloaded html asset junk
+public/*_files/
+public/*.html
+
+# optional: downloaded images not needed
+public/*.download

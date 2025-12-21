@@ -1,0 +1,122 @@
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+
+
+
+
+
+ .custom-scroll::-webkit-scrollbar {
+  width: 5px; 
+ }
+.custom-scroll::-webkit-scrollbar-thumb {
+  background-color: #7a7878;
+  border-radius: 8px;
+}
+/* Default (hide buttons) */
+.custom-scroll::-webkit-scrollbar-button:single-button:vertical:decrement,
+.custom-scroll::-webkit-scrollbar-button:single-button:vertical:increment {
+  height: 0px;
+  background: none;
+  transition: all 0.3s ease;
+}
+
+/* When hover on scrollbar */
+.custom-scroll:hover::-webkit-scrollbar{
+ width:8px;
+}
+.custom-scroll:hover::-webkit-scrollbar-button:single-button:vertical:decrement {
+  height: 26px;
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="white"><polygon points="5,0 10,5 0,5"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 8px 8px;
+}
+
+.custom-scroll:hover::-webkit-scrollbar-button:single-button:vertical:increment {
+  height: 16px;
+ 
+  background-image: url('data:image/svg+xml;charset=UTF-8,<svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" fill="white"><polygon points="0,0 10,0 5,5"/></svg>');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 8px 8px;
+}
+.custom-scroll-chats::-webkit-scrollbar {
+  width: 0px; 
+ }
+.custom-scroll-chats::-webkit-scrollbar-thumb {
+  /* background-color: #7a7878; */
+  border-radius: 0px;
+}
+.anima{
+  position: relative;
+  top: -50px;
+  animation: tops 1s normal 1 forwards;
+}
+@keyframes tops {
+  to{top: 1px;}
+}
+.anime_close{
+  position: relative;
+  top: 1px;
+  animation: tops1 1s normal 1 forwards;
+}
+@keyframes tops1 {
+  to{ top: -50px;}
+}
+section{
+    color: white ;
+}
+.emoji-wrapper {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  z-index: 9999;
+  background: white;
+  border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.3);
+}
+
+.hidden {
+  display: none;
+}
+.typing-dots {
+  font-size: 12px;
+  color: #25d366;
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.typing-dots span {
+  animation: typingBlink 1.4s infinite both;
+  font-weight: bold;
+}
+
+/* delay for each dot */
+.typing-dots span:nth-child(2) {
+  animation-delay: 0.2s;
+}
+
+.typing-dots span:nth-child(3) {
+  animation-delay: 0.4s;
+}
+
+.typing-dots span:nth-child(4) {
+  animation-delay: 0.6s;
+}
+
+@keyframes typingBlink {
+  0% { opacity: 0.2; }
+  20% { opacity: 1; }
+  100% { opacity: 0.2; }
+}
+/* .typing-dots {
+  border: 1px solid red;
+} */

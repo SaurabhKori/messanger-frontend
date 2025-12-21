@@ -27,6 +27,7 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css"
             ],
             "scripts": []
@@ -45,12 +46,19 @@
                   "maximumError": "8kB"
                 }
               ],
-              "outputHashing": "all"
+              "outputHashing": "all",
+              "serviceWorker": "ngsw-config.json"
             },
             "development": {
               "optimization": false,
               "extractLicenses": false,
-              "sourceMap": true
+              "sourceMap": true,
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.development.ts"
+                }
+              ]
             }
           },
           "defaultConfiguration": "production"
@@ -62,7 +70,8 @@
               "buildTarget": "whatsapp:build:production"
             },
             "development": {
-              "buildTarget": "whatsapp:build:development"
+              "buildTarget": "whatsapp:build:development",
+                "hmr": true
             }
           },
           "defaultConfiguration": "development"
@@ -85,12 +94,20 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "@angular/material/prebuilt-themes/azure-blue.css",
+              "src/styles.css",
+              "node_modules/@fortawesome/fontawesome-free/css/all.min.css",
+              "../node_modules/bootstrap/dist/css/bootstrap.min.css"
             ],
-            "scripts": []
+            "scripts": [
+               "node_modules/bootstrap/dist/js/bootstrap.bundle.min.js"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "27dbb3da-399c-473f-90e6-6ecc6aaddb21"
   }
 }

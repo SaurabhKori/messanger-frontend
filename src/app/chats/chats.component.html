@@ -1,0 +1,272 @@
+<section class="w-full flex gap-[0.5px] bg-black justify-start h-screen fixed">
+  <app-left-menu></app-left-menu>
+  <div class="flex gap-[0.5px] rounded-[200px] bg-[#2a2929] w-full ">
+    <main class="bg-[#2a2929]  w-1/2">
+      <div>
+        <app-chat-header (showContact)="showContact($event)"></app-chat-header>
+        <!-- <nav class="navbar bg-[#2a2929] navbar-expand-lg">
+          <div class="container-fluid mt-2.5">
+            <span class="text-[20px] ml-[15px]">Chats</span>
+            <div class="flex justify-between w-16">
+              <span class="w-16 h-[40px] rounded-[3px] flex justify-center items-center">
+                <i class="fa-solid fa-pen-to-square"></i></span>
+              <span class="w-16 h-[40px] rounded-[3px] flex justify-center items-center"><span
+                  class="material-symbols-outlined">
+                  filter_list
+                </span></span>
+            </div>
+          </div>
+        </nav> -->
+        <div class="flex justify-center items-center">
+          <div class="w-[700px] flex justify-around h-[30px] rounded-[5px] border-b-1" [ngClass]="
+            input_click == false
+              ? ['border-b-white', 'bg-[#43434363]']
+              : ['bg-[#272928]', 'border-b-[#199e5c]']
+          ">
+            <span class="ps-1.5"><i class="fa-solid fa-magnifying-glass rotate-90"></i></span>
+            <input type="search" name="" (click)="input_click = true"
+              class="w-[680px] h-[28px] outline-none border-none pl-2" id="" />
+          </div>
+        </div>
+      </div>
+      <div class="overflow-y-scroll h-[83vh] mt-6 custom-scroll" (click)="input_click = false">
+        <app-chatdetails [contactChat]="contactsChat" (sendContactId)="receiveContactId($event)"></app-chatdetails>
+      </div>
+    </main>
+    <main class="bg-[#2a2929]  w-1/2">
+      @if (contactDetails==null) { <div class="h-[100vh] flex justify-center items-center text-gray-400"
+        style="background-image: url('whatsappchatbg.jpg')">
+        <div class="text-center">
+          <i class="fa-solid fa-comments text-4xl mb-2"></i>
+          <p class="text-lg">Select a chat to start messaging</p>
+        </div>
+      </div>
+      }@else {
+      <div class="h-[50px]">
+        <nav class="navbar bg-[#2a2929] navbar-expand-lg">
+          <div class="container-fluid mt-2.5">
+            <div class="flex justify-start items-center w-[80%] gap-6 ml-3.5">
+              <span class="w-[50px] h-[50px] rounded-full bg-cover bg-center border-2 border-gray-300" [ngStyle]="{
+                  'background-image': contactDetails.file
+                    ? 'url(' + url + contactDetails.file.fileurl + ')'
+                    : 'url(profile.png)'
+                }">
+              </span>
+              <span class="">{{contactDetails.contactUser.user_name}}</span>
+            </div>
+            <div class="flex justify-around items-center w-[200px]">
+              <div
+                class="flex justify-center items-center gap-0 w-[100px] bg-[#43434363] h-[40px] outline-[0px] rounded-[4px]">
+                <span class="w-16 h-[40px] flex justify-center items-center hover:bg-[#43434364]">
+                  <i class="fa-solid fa-video"></i></span>
+                <span class="text-[#43434364] ml-[-2.5px]">|</span>
+                <span class="w-16 h-[40px] ml-[-2.5px] flex justify-center items-center hover:bg-[#43434364]"><i
+                    class="fa-solid fa-phone"></i></span>
+              </div>
+              <span (click)="input_drag='open'"><i class="fa-solid fa-magnifying-glass rotate-90"></i></span>
+            </div>
+          </div>
+        </nav>
+      </div>
+
+
+      <!-- <div class="flex flex-col h-[calc(100vh-50px)]">
+
+        <div #chatBody class="flex-1 overflow-y-auto custom-scroll-chats px-2"
+          style="background-image: url('whatsappchatbg.jpg')">
+
+          <div>
+            @for (item of messages; track $index) {
+            @if (item.sender.userId==userId) {
+         
+            <div class="flex justify-end mt-2">
+              <div class="bg-green-500 text-white p-3 rounded-2xl max-w-xs">
+                {{ item.content }}
+              </div>
+            </div>
+            }
+            @if (contactDetails && item.sender.userId === contactDetails.contactUser.userId) {
+            <div class="flex justify-start mt-2">
+              <div class="bg-white text-black p-3 rounded-2xl max-w-xs">
+                {{ item.content }}
+              </div>
+            </div>
+            }
+            }
+          </div>
+        </div>
+        <div class="sticky bottom-0 bg-[#2a2929] h-[50px] flex items-center px-2">
+          <input class="flex-1 outline-none bg-transparent text-white" [(ngModel)]="text"
+            placeholder="Type a message" />
+          <button (click)="send()">➤</button>
+        </div>
+
+      </div> -->
+
+
+      <div class="mt-6 flex flex-col">
+        <div #chatBody class="overflow-y-auto h-[calc(100vh-100px)] custom-scroll-chats"
+          style="background-image: url('whatsappchatbg.jpg')">
+          <div class="flex justify-end h-[50px] " [ngClass]="{
+          'anima': input_drag == 'open',
+          'anime_close': input_drag == 'close',
+          'relative -top-12': input_drag == ''
+      }">
+            <span class="w-[400px] h-[50px] bg-black/40 flex justify-around items-center rounded-[5px]">
+              <span
+                class="w-[280px] flex justify-around h-[30px] rounded-[5px] border-b-1 bg-[#272928] border-b-[#199e5c]">
+                <input type="text" name="" placeholder="Search within chats"
+                  class="w-[260px] h-[28px] outline-none border-none pl-2" id="" />
+              </span>
+              <span><i class="fa-solid fa-angle-up"></i></span>
+              <span><i class="fa-solid fa-angle-down"></i></span>
+              <span>
+                <i class="fa-solid fa-calendar-days"></i>
+              </span>
+              <span>|</span>
+              <span (click)="input_drag='close'"><i class="fa-solid fa-xmark"></i></span>
+            </span>
+          </div>
+          <div class="flex justify-center flex-col">
+            @for (item of messages; track $index) {
+            @if (item.sender.userId==userId) {
+            <div class="flex justify-end mt-2 me-2.5">
+              <div class="relative max-w-xs bg-green-500 text-white p-3 shadow 
+                        rounded-tl-2xl rounded-tr-2xl rounded-bl-2xl">
+                @if (item.attachment) {
+                @if (item.attachment.file_type=="image/jpeg" || item.attachment.file_type=="image/png") {
+                <img [src]="url+item.attachment.fileurl" class=" rounded" />
+                }
+                @else {
+                <a [href]="url+item.attachment.fileurl" target="_blank" class="text-blue-600 underline">
+                  📎 {{ item.attachment.file_name }}
+                </a>
+                }
+
+                }
+                {{ item.content }}
+                <div
+                  class="absolute bottom-0 right-1 w-2 h-2 bg-green-500 rounded-br-none rounded-bl-full transform rotate-[1deg] translate-y-1/2 translate-x-[50%]">
+                </div>
+              </div>
+              <span class="text-xs ms-2 text-gray-400">
+                <!-- SENT ✔ -->
+                @if (!item.deliveredAt) {
+                <i class="fa fa-check"></i>
+                }
+                <!-- DELIVERED ✔✔ -->
+                @if (item.deliveredAt && !item.seenAt) {
+                <i class="fa fa-check-double"></i>}
+
+                <!-- SEEN ✔✔ (BLUE) -->
+                @if (item.seenAt) {
+                <i class="fa fa-check-double text-blue-400"></i>}
+
+              </span>
+            </div>
+            }
+
+            @if (this.contactDetails!=null && item.sender.userId==this.contactDetails.contactUser.userId) {
+            <div class="flex justify-start ms-2.5 mt-3.5">
+              <div class="relative max-w-xs bg-white text-black p-3 shadow 
+                                      rounded-tr-2xl rounded-tl-2xl rounded-br-2xl">
+                <!-- IMAGE -->
+                @if (item.attachment) {
+                @if (item.attachment.file_type=="image/jpeg" || item.attachment.file_type=="image/png") {
+                <img [src]="url+item.attachment.fileurl" class=" rounded" />
+                }
+                @else {
+                <a [href]="url+item.attachment.fileurl" target="_blank" class="text-blue-600 underline">
+                  📎 {{ item.attachment.file_name }}
+                </a>
+                }
+
+                }
+                {{ item.content }}
+
+                <div
+                  class="absolute bottom-0 left-1 w-2 h-2 bg-white rounded-bl-none rounded-br-full transform rotate-[1deg] translate-y-1/2 translate-x-[-50%]">
+                </div>
+              </div>
+            </div>
+            }
+            }
+            <div  class="flex justify-start ms-2.5 mt-44 mb-12 border-none" *ngIf="isTyping && typingUserId === contactDetails.contactUser.userId">
+              <span  class="typing-dots border-none" >
+                typing<span>.</span><span>.</span><span>.</span>
+              </span>
+             
+            </div>
+          </div>
+
+        </div>
+        <div class="fixed w-1/2 bottom-0">
+          <div class="bg-[#2a2929] h-[50px] flex justify-around items-center ">
+            <span class="flex justify-around items-center">
+              <span class="w-16 h-[40px] ml-[-2.5px] flex justify-center items-center hover:bg-[#43434364]"><i
+                  class="fa-solid fa-face-smile"></i></span>
+              <span class="w-16 h-[40px] ml-[-2.5px] flex justify-center items-center hover:bg-[#43434364]"><i
+                  class="fa-solid fa-paperclip" (click)="openFileInput()"></i></span>
+              <input type="file" #fileInput accept="image/*" (change)="onFileSelect($event)" hidden />
+            </span>
+            <span class="w-[300px]"><input class="outline-none" (input)="onTyping()" [(ngModel)]="text" placeholder="text message"
+                type="text"></span>
+            <span class="w-16 h-[40px] ml-[-2.5px] flex justify-center items-center hover:bg-[#43434364]"><i
+                class="fa-solid fa-microphone"></i></span>
+            <span class="w-16 h-[40px] ml-[-2.5px] flex justify-center items-center hover:bg-[#43434364]"
+              (click)="send()"><i class="fa-solid fa-paper-plane"></i></span>
+          </div>
+        </div>
+      </div>
+      }
+      <div *ngIf="previewFiles.length > 0" class="fixed inset-0 z-50 bg-black/70 flex items-center justify-center">
+
+        <div class="w-[70%] h-[85%] bg-[#f0f2f5] rounded-lg flex flex-col shadow-xl">
+
+          <!-- HEADER -->
+          <div class="h-[50px] flex items-center justify-between px-4 border-b bg-white">
+            <span class="text-lg font-medium">Send photo</span>
+            <i class="fa-solid fa-xmark text-xl cursor-pointer hover:text-red-500" (click)="closePreview()"></i>
+          </div>
+
+          <!-- MAIN IMAGE PREVIEW -->
+          <div class="flex-1 flex items-center justify-center  bg-[#e5ddd5]">
+            <img [src]="activePreview" class="max-w-full h-[300px] object-contain rounded" />
+          </div>
+
+          <!-- THUMBNAILS -->
+          <div class="h-[80px] flex items-center gap-2 px-3 bg-[#f0f2f5] overflow-x-auto border-t">
+
+            <img *ngFor="let img of previewFiles" [src]="img" (click)="activePreview = img"
+              class="h-[60px] w-[60px] object-cover rounded cursor-pointer border-2" />
+          </div>
+          <div class="h-[60px] flex items-center px-4 gap-4 bg-white border-t">
+
+            <i class="fa-solid fa-plus text-lg text-gray-500 cursor-pointer hover:text-black "
+              (click)="openFileInput()"></i>
+
+            <i class="fa-regular fa-face-smile text-xl text-gray-500 cursor-pointer hover:text-black"
+              (click)="showEmoji = !showEmoji"></i>
+
+            <input [(ngModel)]="text" placeholder="Caption (optional)"
+              class="flex-1 outline-none text-black text-[15px]" />
+            <!-- <div class="emoji-wrapper" [class.hidden]="!showEmoji">
+              <emoji-mart [emojiSize]="22" [perLine]="7" [showPreview]="false" [enableSearch]="false"
+                (emojiSelect)="addEmoji($event)">
+              </emoji-mart>
+            </div> -->
+
+            <button
+              class="bg-[#25D366] w-[42px] h-[42px] rounded-full flex items-center justify-center text-white hover:bg-green-600 transition">
+
+              <i class="fa-solid fa-paper-plane" (click)="send()"></i>
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+
+    </main>
+  </div>
+</section>

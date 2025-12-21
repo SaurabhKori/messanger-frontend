@@ -1,0 +1,60 @@
+<div class="fixed bottom-0 w-80 h-[500px] bg-white shadow-lg z-50 rounded-t-lg p-6 overflow-y-auto">
+  <div class="flex justify-between items-center mb-6">
+    <h2 class="text-xl font-bold">Profile</h2>
+    <button (click)="closePanel()" class="text-gray-500 hover:text-gray-700">
+      <i class="fa-solid fa-xmark text-xl"></i>
+    </button>
+  </div>
+
+  <!-- Profile Info -->
+  <div class="flex flex-col items-center text-center mb-8">
+    <div class="relative">
+      <img [src]="profileSignal.getProfilePic().profileUrl" 
+           class="w-24 h-24 rounded-full mb-2 border-2 border-white shadow-lg" 
+           alt="User Profile" />
+      <div class="absolute -bottom-1 -right-1 bg-blue-500 rounded-full p-1">
+        <i class="fa-solid fa-camera text-white text-sm cursor-pointer" (click)="openFileInput()"></i>
+      </div>
+    </div>
+    <h3 class="text-lg font-semibold">{{profileSignal.getProfilePic().profileName}}</h3>
+    <p class="text-sm text-gray-500">{{profileSignal.getProfilePic().profileStatus}}</p>
+    <button class="mt-4 px-4 py-2 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors text-sm" 
+            (click)="editProfile()">
+      Edit Profile
+    </button>
+  </div>
+
+  <hr class="my-6 border-gray-200" />
+
+  <!-- Options -->
+  <ul class="space-y-3 text-gray-700">
+    <li class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors" 
+        (click)="openStarredMessages()">
+      <i class="fa-solid fa-star text-blue-500"></i>
+      <span>Starred Messages</span>
+    </li>
+    <li class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors" 
+        (click)="openPrivacySettings()">
+      <i class="fa-solid fa-shield-halved text-blue-500"></i>
+      <span>Privacy</span>
+    </li>
+    <li class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors" 
+        (click)="openLinkedDevices()">
+      <i class="fa-solid fa-laptop text-blue-500"></i>
+      <span>Linked Devices</span>
+    </li>
+    <li class="flex items-center gap-3 p-2 rounded-lg hover:bg-gray-50 transition-colors" 
+        (click)="openSettings()">
+      <i class="fa-solid fa-gear text-blue-500"></i>
+      <span>Settings</span>
+    </li>
+    <li class="flex items-center gap-3 p-2 rounded-lg text-red-500 hover:bg-red-50 transition-colors" 
+        (click)="logout()">
+      <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      <span>Logout</span>
+    </li>
+  </ul>
+
+  <!-- Hidden file input -->
+  <input type="file" #fileInput accept="image/*" (change)="onFileSelected($event)" hidden />
+</div>

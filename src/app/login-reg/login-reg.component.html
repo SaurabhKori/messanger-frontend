@@ -1,0 +1,123 @@
+<div class="min-h-screen bg-gray-100 flex items-center justify-center">
+  <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg flex flex-col md:flex-row overflow-hidden">
+
+    <!-- WhatsApp Logo / Info Section -->
+    <div class="md:w-1/2 bg-green-500 text-white flex flex-col items-center justify-center p-8">
+      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
+           alt="WhatsApp Logo"
+           class="w-24 h-24 mb-4" />
+      <h2 class="text-2xl font-bold mb-2">Welcome to WhatsApp</h2>
+      <p class="text-center text-sm px-4">
+        {{ isLogin ? 'Login to continue your conversations' : 'Create a new WhatsApp account to get started' }}
+      </p>
+    </div>
+
+    <!-- Form Section -->
+    <div class="md:w-1/2 p-8">
+      <h2 class="text-2xl font-semibold text-green-600 mb-6">
+        {{ isLogin ? 'Login to WhatsApp' : 'Register on WhatsApp' }}
+      </h2>
+
+      <form [formGroup]="reg" (ngSubmit)="isLogin ? login() : register()"  class="space-y-4">
+
+        <!-- Name Field (Register only) -->
+        @if (!isLogin) {
+          <div >
+          <label for="name" class="block mb-1 text-sm font-medium text-gray-700">Name</label>
+          <input
+            id="name"
+            name="name"
+            type="text"
+            formControlName="user_name"
+            class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring focus:ring-green-400"
+            required
+          />
+           @if ( ( reg.get('user_name')?.dirty || reg.get('user_name')?.touched)) {
+              @if (reg.get('user_name')?.hasError("required")) {
+                <span class="text-[12px] text-red-700">user name is required</span>
+              }
+               @if (reg.get('user_name')?.hasError("pattern")) {
+                <span class="text-[12px] text-red-700">Only Character</span>
+              }
+           }
+          
+        </div>
+        }
+
+        <!-- Email Field -->
+        <!-- <div>
+          <label for="email" class="block mb-1 text-sm font-medium text-gray-700">Email</label>
+          <input
+            id="email"
+            name="email"
+            type="email"
+           
+            class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring focus:ring-green-400"
+            required
+          />
+        </div> -->
+
+        <!-- Phone Number Field -->
+        <div>
+          <label for="phone" class="block mb-1 text-sm font-medium text-gray-700">Phone Number</label>
+          <input
+            id="phone"
+            name="phone"
+            type="tel"
+            formControlName="userPhone"
+            maxlength="10"
+            class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring focus:ring-green-400"
+            required
+          />
+          @if (reg.get('userPhone')?.dirty || reg.get('usr_phone')?.touched) {
+            @if(reg.get('userPhone')?.hasError('required')){
+               <span class="text-[12px] text-red-700">phone number is required*</span>
+            }@else if (reg.get('userPhone')?.hasError('pattern') || reg.get('userPhone')?.hasError('maxLength') || reg.get('userPhone')?.hasError('minLength')) {
+              <span class="text-[12px] text-red-700">please enter correct phone number*</span>
+            }
+          }
+        </div>
+
+        <!-- Password Field -->
+        <div>
+          <label for="password" class="block mb-1 text-sm font-medium text-gray-700">Password</label>
+          <input
+            id="password"
+            name="password"
+            type="password"
+           formControlName="user_password"
+            class="w-full border border-gray-300 rounded px-4 py-2 focus:outline-none focus:ring focus:ring-green-400"
+            required
+          />
+         @if ( (reg.get('user_password')?.dirty || reg.get('user_password')?.touched)) {
+            @if(reg.get('user_password')?.hasError('required')){
+               <span class="text-[12px] text-red-700">password is required*</span>
+            }@else if (reg.get('user_password')?.hasError('pattern')) {
+              <span class="text-[12px] text-red-700">Password must be 8+ characters with uppercase, lowercase, number, and special character ( #, $, %, ^, &, +, =).</span>
+            }
+          }
+        </div>
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          class="w-full bg-green-500 hover:bg-green-600 text-white rounded px-4 py-2 font-semibold"
+        >
+          {{ isLogin ? 'Login' : 'Register' }}
+        </button>
+
+        <!-- Message -->
+        <!-- <p class="text-red-500 text-sm mt-2" *ngIf="message">
+          {{ message }}
+        </p> -->
+      </form>
+
+      <!-- Toggle Form Link -->
+      <p class="text-sm text-center mt-4">
+        <a href="javascript:void(0)" (click)="toggleForm()" class="text-green-600 hover:underline">
+          {{ isLogin ? "Don't have an account? Register" : "Already have an account? Login" }}
+        </a>
+      </p>
+    </div>
+  </div>
+</div>

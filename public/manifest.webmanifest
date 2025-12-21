@@ -1,0 +1,67 @@
+{
+  "name": "whatsapp",
+  "short_name": "whatsapp",
+  "theme_color": "#1976d2",
+  "background_color": "#00000",
+  "display": "standalone",
+  "scope": "./",
+  "start_url": "./",
+  "icons": [
+    {
+      "src": "icons/whatsappicon.png",
+      "sizes": "72x72",
+      "type": "image/png",
+      "background_color":"black",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/whatsappicon.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "background_color":"black",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/whatsappicon.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "background_color":"black",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/whatsappicon.png",
+      "sizes": "144x144",
+      "type": "image/png",
+      "background_color":"black",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/whatsappicon.png",
+      "sizes": "152x152",
+      "type": "image/png",
+      "background_color":"black",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/whatsappicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "background_color":"black",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/whatsappicon.png",
+      "sizes": "384x384",
+      "type": "image/png",
+      "background_color":"black",
+      "purpose": "maskable any"
+    },
+    {
+      "src": "icons/whatsappicon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "background_color":"black",
+      "purpose": "maskable any"
+    }
+  ]
+}
