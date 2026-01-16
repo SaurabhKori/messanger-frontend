@@ -1,5 +1,3 @@
-# Deploy Angular build to Firebase Hosting using GitHub Actions
-
 name: Deploy to Firebase Hosting on merge
 
 on:
@@ -34,5 +32,4 @@ jobs:
         with:
           repoToken: ${{ secrets.GITHUB_TOKEN }}
           firebaseServiceAccount: ${{ secrets.FIREBASE_SERVICE_ACCOUNT_MESSANGER_F1E79 }}
-          channelId: live
           projectId: messanger-f1e79
