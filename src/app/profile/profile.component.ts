@@ -4,7 +4,6 @@ import { SecureStorageService } from '../auth/secure-storage.service';
 // import { UserService } from '../services/user.service';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { environment } from '../../environments/environment';
 // import { FileItem, FileUploader, FileUploaderItem } from 'ng2-file-upload';
 import { Inject } from '@angular/core';
 import { LinkedDevicesDialogComponent } from '../dialogs/linked-devices/linked-devices.component';
@@ -13,7 +12,7 @@ import { SettingsDialogComponent } from '../dialogs/settings/settings.component'
 import { EditProfileDialogComponent } from '../dialogs/edit-profile/edit-profile.component';
 import { UserregistrationserviceService } from '../Service/userregistrationservice.service';
 import { ProfileSignalService } from '../store/profile_signal.service';
-
+import { environment } from '../../environments/environment.development';
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -29,6 +28,7 @@ export class ProfileComponent implements OnInit {
   };
   name:any='User'
   status:any= 'Available'
+  url: string = environment.apiUrl;
   profilePic:any= '/assets/images/default-profile.png'
   @ViewChild('fileInput') fileInput!: ElementRef<HTMLInputElement>;
   userid: any;
@@ -126,7 +126,7 @@ export class ProfileComponent implements OnInit {
           profileName: this.name||'',
           profileStatus: this.status,
           profileId:res["payload"]["file_id"]?res["payload"]["file_id"]:'',
-           profileUrl:res["payload"]["fileurl"]?res["payload"]["fileurl"]:''
+           profileUrl:res["payload"]["fileurl"]?res["payload"]["fileurl"].toString().replace('http://10.50.116.99:8400','https://messanger-backend-f704.onrender.com'):''
         });
           // console.log(this.profileSignal.getProfilePic())
           // console.log(this.profilePic,res["payload"]["fileurl"])

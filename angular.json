@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "whatsapp": {
+    "messanger-frontend": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/whatsapp",
+            "outputPath": "dist/messanger-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -37,8 +37,8 @@
               "budgets": [
                 {
                   "type": "initial",
-                  "maximumWarning": "500kB",
-                  "maximumError": "1MB"
+                  "maximumWarning": "3mb",
+    "maximumError": "5mb"
                 },
                 {
                   "type": "anyComponentStyle",
@@ -67,10 +67,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "whatsapp:build:production"
+              "buildTarget": "messanger-frontend:build:production"
             },
             "development": {
-              "buildTarget": "whatsapp:build:development",
+              "buildTarget": "messanger-frontend:build:development",
                 "hmr": true
             }
           },

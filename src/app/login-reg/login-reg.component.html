@@ -1,21 +1,22 @@
 <div class="min-h-screen bg-gray-100 flex items-center justify-center">
   <div class="w-full max-w-4xl bg-white shadow-lg rounded-lg flex flex-col md:flex-row overflow-hidden">
 
-    <!-- WhatsApp Logo / Info Section -->
+    <!-- Messanger Logo / Info Section -->
     <div class="md:w-1/2 bg-green-500 text-white flex flex-col items-center justify-center p-8">
-      <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg"
-           alt="WhatsApp Logo"
+      <!-- <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Messanger.svg" -->
+        <img src="chatbot-removebg-preview.png"
+           alt="Messanger Logo"
            class="w-24 h-24 mb-4" />
-      <h2 class="text-2xl font-bold mb-2">Welcome to WhatsApp</h2>
+      <h2 class="text-2xl font-bold mb-2">Welcome to Messanger</h2>
       <p class="text-center text-sm px-4">
-        {{ isLogin ? 'Login to continue your conversations' : 'Create a new WhatsApp account to get started' }}
+        {{ isLogin ? 'Login to continue your conversations' : 'Create a new Messanger account to get started' }}
       </p>
     </div>
 
     <!-- Form Section -->
     <div class="md:w-1/2 p-8">
       <h2 class="text-2xl font-semibold text-green-600 mb-6">
-        {{ isLogin ? 'Login to WhatsApp' : 'Register on WhatsApp' }}
+        {{ isLogin ? 'Login to Messanger' : 'Register on Messanger' }}
       </h2>
 
       <form [formGroup]="reg" (ngSubmit)="isLogin ? login() : register()"  class="space-y-4">
