@@ -1,4 +1,4 @@
-# This file deploys Angular build to Firebase Hosting using GitHub Actions
+# Deploy Angular build to Firebase Hosting using GitHub Actions
 
 name: Deploy to Firebase Hosting on merge
 
@@ -18,10 +18,10 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: 20.19.2
+          node-version: 20
 
       - name: Install dependencies
-        run: npm install
+        run: npm ci
 
       - name: Install Angular CLI
         run: npm install -g @angular/cli
